@@ -165,7 +165,7 @@ const HoaDon = () => {
             <div className="d-flex justify-content-between">
               <div className="box col-auto col-3">
                 <div style={{ textAlign: 'start' }} className="field">
-                  <strong>Tìm kiếm hóa đơn: </strong>
+                  <strong>Tìm kiếm hóa đơn:  </strong>
                 </div>
                 <input
                   style={{
@@ -302,7 +302,7 @@ const HoaDon = () => {
                   <th>Loại Đơn</th>
                   <th>Tên Khách Hàng</th>
                   <th>Ngày Tạo Đơn</th>
-                  {/* <th>Số Luợng</th> */}
+                  <th>Số Luợng</th>
                   <th>Tổng tiền</th>
                   <th>Tình trạng</th>
                   <th>Action</th>
@@ -328,7 +328,7 @@ const HoaDon = () => {
                       </td>
                       <td>{d.ten_nguoi_nhan}</td>
                       <td>{formatDate(d.ngay_tao)}</td>
-                      {/* <td>{d.tong_so_luong}</td> */}
+                      <td>{d.tong_so_luong}</td>
                       <td style={{ fontWeight: 'bold', color: 'red' }}>
                         {convertToCurrency(d.tong_tien)}
                       </td>
