@@ -2,7 +2,6 @@
 import React from 'react'
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
 import { useState, useEffect } from 'react'
-import _ from 'lodash'
 import {
   doanhThuTQTheoNgay,
   doanhThuOnlineTheoNgay,

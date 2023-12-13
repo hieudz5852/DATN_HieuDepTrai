@@ -322,12 +322,12 @@ function ContentCheckOut({ dataLogin, idGH }) {
 
   const handleThanhToan = () => {
     if (active) {
-      thanhToanHD(id, valuesUpdateHD, '')
+      thanhToanHD(id, valuesUpdateHD, 'Khách trả tiền khi giao')
       navigate('/trang-chu')
     }
     if (active === false) {
       window.location.href = urlPay
-      thanhToanHD(id, valuesUpdateHD, '')
+      thanhToanHD(id, valuesUpdateHD, 'Đã thanh toán VNPay')
     }
   }
 
