@@ -131,12 +131,22 @@ public class GioHangController {
                     .ghiChu("Thanh toán thành công")
                     .hoaDon(hd)
                     .build();
+            List<LichSuHoaDon> danhSachLichSuHoaDon = serviceLSHD.findAllLSHDByIDsHD(id);
+
+            for (LichSuHoaDon lichSu : danhSachLichSuHoaDon) {
+                String nguoiTaoValue = lichSu.getNguoiTao(); // Lấy giá trị nguoiTao từ LichSuHoaDon
+                if (nguoiTaoValue == null || nguoiTaoValue.isEmpty()) {
+                    lichSu.setNguoiTao(nguoiTao);
+                    lichSuHoaDon.setNguoiTao(nguoiTao);
+                }
+            }
             serviceLSHD.createLichSuDonHang(lichSuHoaDon);
             hoaDon.setTrangThai(1);
         }
         if (httt.getTen().equalsIgnoreCase("Tiền mặt")) {
             hoaDon.setTrangThai(0);
         }
+
         return ResponseEntity.ok(serviceHD.add(hoaDon));
     }
 
@@ -200,7 +210,7 @@ public class GioHangController {
                 .ma(maLSHD)
                 .ten("Đã đặt đơn hàng")
                 .trangThai(0)
-                .nguoiTao(nguoiTao)
+                .nguoiTao(hoaDon.getTenNguoiNhan())
                 .ngayTao(new Date())
                 .hoaDon(hoaDon)
                 .ghiChu("Đã đặt đơn hàng")
