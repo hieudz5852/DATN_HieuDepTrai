@@ -125,7 +125,7 @@ public class GioHangController {
             LichSuHoaDon lichSuHoaDon = new LichSuHoaDon().builder()
                     .ma(maLSHD)
                     .ten("Thanh toán thành công")
-                    .trangThai(6)
+                    .trangThai(1)
                     .ngayTao(new Date())
                     .nguoiTao(nguoiTao)
                     .ghiChu("Thanh toán thành công")
