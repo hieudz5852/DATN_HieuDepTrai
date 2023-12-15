@@ -277,7 +277,7 @@ export default function BanHangTaiQuay() {
   }
 
   const handleThanhToan = () => {
-    ThanhToanHD(id, dataLogin && dataLogin.ten)
+    ThanhToanHD(id, (dataLoginNV && dataLoginNV.ten) ||  (dataLoginAD && dataLoginAD.ten))
     setValuesUpdateHD({
       ...valuesUpdateHD,
       ...valuesUpdateHD.hinhThucThanhToan,
@@ -292,7 +292,7 @@ export default function BanHangTaiQuay() {
 
   const handleThanhToanWithVNP = () => {
     window.location.href = urlPay
-    ThanhToanHD(id, dataLogin && dataLogin.ten)
+    ThanhToanHD(id,  (dataLoginNV && dataLoginNV.ten) ||  (dataLoginAD && dataLoginAD.ten))
     setValuesUpdateHD({
       ...valuesUpdateHD,
       ...valuesUpdateHD.hinhThucThanhToan,

@@ -202,7 +202,7 @@ function DonHang(props) {
 
   const postKM = async (value) => {
     const res = await addKM(value)
-    if (res.data === 'Mày thích spam không ?') {
+    if (res.data === '') {
       toast.warning('Bạn đang sử dụng mã giảm giá này')
       return
     } else {

@@ -132,6 +132,10 @@ public class GioHangController {
                     .hoaDon(hd)
                     .build();
             serviceLSHD.createLichSuDonHang(lichSuHoaDon);
+            hoaDon.setTrangThai(1);
+        }
+        if (httt.getTen().equalsIgnoreCase("Tiền mặt")) {
+            hoaDon.setTrangThai(0);
         }
         return ResponseEntity.ok(serviceHD.add(hoaDon));
     }

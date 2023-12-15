@@ -923,7 +923,7 @@ function HDCT() {
 
             <View style={styles.flexContainer}>
               <Text style={styles.textLeft}>Tiền cần thanh toán</Text>
-              <Text style={styles.textRight}>{convertToCurrency(hoaDon.tongTienKhiGiam)}</Text>
+              <Text style={styles.textRight}>{convertToCurrency(tongTienKhiGiam)}</Text>
             </View>
           </View>
           <View>

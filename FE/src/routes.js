@@ -22,6 +22,7 @@ import UpdateKM from 'views/khuyenmai/updateKM'
 import HoaDon from 'views/hoadon/hoadon'
 import HDCT from 'views/hoadon/hoa-don-chi-tiet'
 import ThongKe from 'views/thong-ke/thongke'
+import Page404 from 'views/pages/page404/Page404'
 // Buttons
 const SanPham = React.lazy(() => import('./views/sanpham/sanpham/SanPham'))
 const AddSanPham = React.lazy(() => import('./views/sanpham/sanpham/AddSanPham'))
@@ -32,87 +33,105 @@ const UpdateMauSac = React.lazy(() => import('./views/sanpham/mausac/UpdateMS'))
 const ChatLieu = React.lazy(() => import('./views/sanpham/chatlieu/ChatLieu'))
 // Bán hàng tại quầy
 const BanHangTaiQuay = React.lazy(() => import('./views/ban-hang-tai-quay/BanHangTaiQuay'))
+const dataLoginVip = JSON.parse(
+  localStorage.getItem('dataLoginAD') || localStorage.getItem('dataLoginNV'),
+)
 const routes = [
   { path: '/', exact: true, name: 'Home' },
 
-  { path: '/ban-hang-tai-quay', name: 'Bán hàng tại quầy', element: BanHangTaiQuay, exact: true },
+  {
+    path: '/ban-hang-tai-quay',
+    name: 'Bán hàng tại quầy',
+    element: dataLoginVip ? BanHangTaiQuay : Page404,
+    exact: true,
+  },
 
-  { path: '/quan-ly-san-pham/san-pham', name: 'Sản Phẩm', element: SanPham },
-  { path: '/quan-ly-san-pham/san-pham/add', element: AddSanPham },
+  {
+    path: '/quan-ly-san-pham/san-pham',
+    name: 'Sản Phẩm',
+    element: dataLoginVip ? SanPham : Page404,
+  },
+  { path: '/quan-ly-san-pham/san-pham/add', element: dataLoginVip ? AddSanPham : Page404 },
   {
     path: '/quan-ly-san-pham/san-pham/detail/:id/:idSP',
-    element: UpdateSanPham,
+    element: dataLoginVip ? UpdateSanPham : Page404,
   },
-  { path: '/quan-ly-san-pham/mau-sac', name: 'Màu Sắc', element: MauSac },
-  { path: '/quan-ly-san-pham/mau-sac/add', element: AddMauSac },
-  { path: '/quan-ly-san-pham/mau-sac/update', element: UpdateMauSac },
+  { path: '/quan-ly-san-pham/mau-sac', name: 'Màu Sắc', element: dataLoginVip ? MauSac : Page404 },
+  { path: '/quan-ly-san-pham/mau-sac/add', element: dataLoginVip ? AddMauSac : Page404 },
+  { path: '/quan-ly-san-pham/mau-sac/update', element: dataLoginVip ? UpdateMauSac : Page404 },
   {
     path: '/quan-ly-san-pham/mau-sac/detail/:id',
-    element: UpdateMauSac,
+    element: dataLoginVip ? UpdateMauSac : Page404,
   },
 
-  { path: '/quan-ly-san-pham/chat-lieu', name: 'Chất Liệu', element: ChatLieu },
-  { path: '/quan-ly-san-pham/chat-lieu/add', element: AddChatLieu },
-  { path: '/quan-ly-san-pham/chat-lieu/update', element: UpdateChatLieu },
+  {
+    path: '/quan-ly-san-pham/chat-lieu',
+    name: 'Chất Liệu',
+    element: dataLoginVip ? ChatLieu : Page404,
+  },
+  { path: '/quan-ly-san-pham/chat-lieu/add', element: dataLoginVip ? AddChatLieu : Page404 },
+  { path: '/quan-ly-san-pham/chat-lieu/update', element: dataLoginVip ? UpdateChatLieu : Page404 },
   {
     path: '/quan-ly-san-pham/chat-lieu/detail/:id',
-    element: UpdateChatLieu,
+    element: dataLoginVip ? UpdateChatLieu : Page404,
   },
 
-  { path: '/quan-ly-san-pham/nsx', name: 'Nhà sản xuất', element: NSX },
-  { path: '/quan-ly-san-pham/nsx/add', element: AddNSX },
-  { path: '/quan-ly-san-pham/nsx/update', element: UpdateNSX },
+  { path: '/quan-ly-san-pham/nsx', name: 'Nhà sản xuất', element: dataLoginVip ? NSX : Page404 },
+  { path: '/quan-ly-san-pham/nsx/add', element: dataLoginVip ? AddNSX : Page404 },
+  { path: '/quan-ly-san-pham/nsx/update', element: dataLoginVip ? UpdateNSX : Page404 },
   {
     path: '/quan-ly-san-pham/nsx/detail/:id',
-    element: UpdateNSX,
+    element: dataLoginVip ? UpdateNSX : Page404,
   },
 
-  { path: '/quan-ly-san-pham/kich-co', name: 'Kích cỡ', element: KC },
-  { path: '/quan-ly-san-pham/kich-co/add', element: AddKC },
-  { path: '/quan-ly-san-pham/kich-co/update', element: UpdateKC },
+  { path: '/quan-ly-san-pham/kich-co', name: 'Kích cỡ', element: dataLoginVip ? KC : Page404 },
+  { path: '/quan-ly-san-pham/kich-co/add', element: dataLoginVip ? AddKC : Page404 },
+  { path: '/quan-ly-san-pham/kich-co/update', element: dataLoginVip ? UpdateKC : Page404 },
   {
     path: '/quan-ly-san-pham/kich-co/detail/:id',
-    element: UpdateKC,
+    element: dataLoginVip ? UpdateKC : Page404,
   },
 
-  { path: '/quan-ly-san-pham/lsp', name: 'Loại SP', element: LSP },
-  { path: '/quan-ly-san-pham/lsp/add', element: AddLSP },
-  { path: '/quan-ly-san-pham/lsp/update', element: UpdateLSP },
+  { path: '/quan-ly-san-pham/lsp', name: 'Loại SP', element: dataLoginVip ? LSP : Page404 },
+  { path: '/quan-ly-san-pham/lsp/add', element: dataLoginVip ? AddLSP : Page404 },
+  { path: '/quan-ly-san-pham/lsp/update', element: dataLoginVip ? UpdateLSP : Page404 },
   {
     path: '/quan-ly-san-pham/lsp/detail/:id',
-    element: UpdateLSP,
+    element: dataLoginVip ? UpdateLSP : Page404,
   },
 
-  { path: '/nhan-vien/hien-thi', name: 'Nhân viên', element: NhanVien },
-  { path: '/nhan-vien/add', element: AddNV },
-  { path: '/nhan-vien/update', element: UpdateNV },
+  { path: '/nhan-vien/hien-thi', name: 'Nhân viên', element: dataLoginVip ? NhanVien : Page404 },
+  { path: '/nhan-vien/add', element: dataLoginVip ? AddNV : Page404 },
+  { path: '/nhan-vien/update', element: dataLoginVip ? UpdateNV : Page404 },
   {
     path: '/nhan-vien/detail/:id',
-    element: UpdateNV,
+    element: dataLoginVip ? UpdateNV : Page404,
   },
 
-  { path: '/khach-hang/hien-thi', name: 'Khách hàng', element: KhachHang },
-  { path: '/khach-hang/add', element: AddKH },
-  { path: '/khach-hang/update', element: UpdateKH },
+  { path: '/khach-hang/hien-thi', name: 'Khách hàng', element: dataLoginVip ? KhachHang : Page404 },
+  { path: '/khach-hang/add', element: dataLoginVip ? AddKH : Page404 },
+  { path: '/khach-hang/update', element: dataLoginVip ? UpdateKH : Page404 },
   {
     path: '/khach-hang/detail/:id',
-    element: UpdateKH,
+    element: dataLoginVip ? UpdateKH : Page404,
   },
-  
-  { path: '/khuyen-mai/hien-thi', name: 'Khuyến Mãi', element: KhuyenMai },
-  { path: '/khuyen-mai/add', element: AddKM },
-  { path: '/khuyen-mai/update', element: UpdateKM },
+
+  { path: '/khuyen-mai/hien-thi', name: 'Khuyến Mãi', element: dataLoginVip ? KhuyenMai : Page404 },
+  { path: '/khuyen-mai/add', element: dataLoginVip ? AddKM : Page404 },
+  { path: '/khuyen-mai/update', element: dataLoginVip ? UpdateKM : Page404 },
   {
     path: '/khuyen-mai/detail/:id',
-    element: UpdateKM,
+    element: dataLoginVip ? UpdateKM : Page404,
   },
-  
-  { path: '/hoa-don/hien-thi', name: 'Hóa Đơn', element: HoaDon },
-  { path: '/hoa-don/chi-tiet/:id', name: 'Hóa Đơn Chi Tiết', element: HDCT },
 
+  { path: '/hoa-don/hien-thi', name: 'Hóa Đơn', element: dataLoginVip ? HoaDon : Page404 },
+  {
+    path: '/hoa-don/chi-tiet/:id',
+    name: 'Hóa Đơn Chi Tiết',
+    element: dataLoginVip ? HDCT : Page404,
+  },
 
-  { path: '/thong-ke', name: 'Thống kê', element: ThongKe },
-
+  { path: '/thong-ke', name: 'Thống kê', element: dataLoginVip ? ThongKe : Page404 },
 ]
 
 export default routes

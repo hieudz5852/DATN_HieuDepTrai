@@ -9,7 +9,7 @@ import { addKhuyenMai, clearGH, thanhToan } from 'service/GioHangService'
 import { detailKH } from 'service/KhachHangService'
 import { payOnline } from 'service/PayService'
 import { getById, getKmById } from 'service/ServiceDonHang'
-
+const dataLoginKH = JSON.parse(localStorage.getItem('dataLogin'))
 function ContentCheckOut({ dataLogin, idGH }) {
   const { id } = useParams()
   const navigate = useNavigate()
@@ -322,12 +322,12 @@ function ContentCheckOut({ dataLogin, idGH }) {
 
   const handleThanhToan = () => {
     if (active) {
-      thanhToanHD(id, valuesUpdateHD, dataLogin.tenKhachHang)
+      thanhToanHD(id, valuesUpdateHD, dataLoginKH && dataLoginKH.tenKhachHang)
       navigate('/trang-chu')
     }
     if (active === false) {
-      window.location.href = urlPay
-      thanhToanHD(id, valuesUpdateHD, dataLogin.tenKhachHang)
+      window.location.href = urlPay 
+      thanhToanHD(id, valuesUpdateHD, dataLoginKH && dataLoginKH.tenKhachHang)
     }
   }
 
