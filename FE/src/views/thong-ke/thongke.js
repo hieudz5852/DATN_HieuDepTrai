@@ -266,14 +266,14 @@ const ThongKe = () => {
         <CCol xs={6}>
           <CCard style={{ height: 200 }} className="mb-4">
             <CCardHeader>
-              <span style={{ fontWeight: 'bold', fontSize: 30 }}>
+              <span style={{ fontWeight: 'bold', fontSize: 28 }}>
                 Doanh thu tổng trong năm {currentYear}
               </span>
             </CCardHeader>
             <CCardBody>
               <CRow>
                 <CCol
-                  style={{ fontSize: 40, fontWeight: 'bold', color: 'red', paddingTop: 25 }}
+                  style={{ fontSize: 35, fontWeight: 'bold', color: 'red', paddingTop: 25 }}
                   xs={6}
                 >
                   {convertToCurrency(tongNam)}

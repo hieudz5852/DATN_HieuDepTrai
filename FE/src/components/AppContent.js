@@ -22,7 +22,7 @@ const AppContent = () => {
               )
             )
           })}
-          <Route path="/" element={<Navigate to="thong-ke" replace />} />
+          <Route path="/" element={<Navigate to="login" replace />} />
         </Routes>
       </Suspense>
     </CContainer>
