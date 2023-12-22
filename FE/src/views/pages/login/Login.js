@@ -40,6 +40,10 @@ const Login = () => {
       toast.error('Sai tài khoản hoặc mật khẩu')
       return
     }
+    if (res.data === 'Tài khoản đã bị tạm khóa !') {
+      toast.error(res.data);
+      return;
+    }
     if (res.data.role === 'KH') {
       navigate('/trang-chu')
       toast.success('Đăng nhập thành công')

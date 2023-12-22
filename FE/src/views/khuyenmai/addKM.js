@@ -39,17 +39,35 @@ const AddKM = () => {
       toast.error('Vui lòng nhập đầy đủ thông tin! ')
       return
     }
-
-    if (values.loaiGiam === false && (values.mucGiam < 0 || values.mucGiam > 100)) {
-      toast.error('Nhập số % giảm sai, vui lòng nhập lại')
+    const startDate = new Date(values.thoiGianBatDau);
+      const endDate = new Date(values.thoiGianKetThuc);
+      if (endDate <= startDate) {
+        toast.error('Ngày kết thúc phải lớn hơn ngày bắt đầu!');
+        return;
+      }
+      if (values.loaiGiam === false && (values.mucGiam < 0 || values.mucGiam > 80)) {
+        toast.error('Mức giảm không được quá 80%, vui lòng nhập lại !')
       return
     }
+    if (values.tien < 10000) {
+      toast.error('Vui lòng nhập tiền tối thiểu trên 10k !');
+      return;
+    }
+    if (!values.loaiGiam === false && values.mucGiam > (values.tien * 10) / 100) {
+      toast.error('Mức giảm không được lớn hơn quá 10% so với mức tiền tối thiểu, vui lòng nhập lại');
+      return;
+    }
+
     await post(values) // Gọi hàm post nếu dữ liệu hợp lệ
   }
 
   const handleMucGiamChange = (event) => {
     const mucGiam = event.target.value
-    setValues({ ...values, mucGiam })
+    if (mucGiam >=1 ) {
+      setValues({ ...values, mucGiam })
+    }else{
+      event.preventDefault();
+    }
     // setError(false); // Reset lỗi khi giá trị thay đổi
   }
 
@@ -116,10 +134,10 @@ const AddKM = () => {
                       <input
                         className="form-control"
                         type="number"
+                        min={1}
                         value={values.mucGiam}
                         onChange={handleMucGiamChange}
                         disabled={values.loaiGiam === ''}
-                        min={0}
                       />
                     </div>
 
@@ -131,8 +149,12 @@ const AddKM = () => {
                         className="form-control"
                         type="number"
                         value={values.tien}
-                        min={0}
-                        onChange={(event) => setValues({ ...values, tien: event.target.value })}
+                        min={1}
+                        onChange={(event) =>{if (event.target.value >= 1) {
+                          setValues({ ...values, tien: event.target.value })
+                        }else{
+                          event.preventDefault();
+                        }}}
                       />
                     </div>
 
@@ -142,7 +164,7 @@ const AddKM = () => {
                       </label>
                       <input
                         className="form-control"
-                        type="datetime-local"
+                        type="date"
                         value={values.thoiGianBatDau}
                         onChange={(event) =>
                           setValues({ ...values, thoiGianBatDau: event.target.value })
@@ -156,7 +178,7 @@ const AddKM = () => {
                       </label>
                       <input
                         className="form-control"
-                        type="datetime-local"
+                        type="date"
                         value={values.thoiGianKetThuc}
                         onChange={(event) =>
                           setValues({ ...values, thoiGianKetThuc: event.target.value })

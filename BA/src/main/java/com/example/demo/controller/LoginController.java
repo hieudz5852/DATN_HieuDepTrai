@@ -34,6 +34,9 @@ public class LoginController {
             return ResponseEntity.ok("Both customer and employee found");
         } else if (kh != null) {
             // Tìm thấy khách hàng
+            if (kh.getTrangThai() == 0) {
+                return ResponseEntity.ok("Tài khoản đã bị tạm khóa !");
+            }
             KhachHangDTO nvDTO = new KhachHangDTO();
             nvDTO.setId(kh.getId());
             nvDTO.setTenKhachHang(kh.getTenKhachHang());
@@ -43,6 +46,9 @@ public class LoginController {
             return ResponseEntity.ok(nvDTO);
         } else if (nv != null) {
             // Tìm thấy nhân viên
+            if (nv.getTrangThai() == 1) {
+                return ResponseEntity.ok("Tài khoản đã bị tạm khóa !");
+            }
             NhanVienDTO nvDTO = new NhanVienDTO();
             nvDTO.setId(nv.getId());
             nvDTO.setTen(nv.getTen());

@@ -110,7 +110,7 @@ const UpdateNV = () => {
                     </label>
                     <input
                       id="diaChi"
-                      type="text"
+                      type="password"
                       className="form-control"
                       value={values.matKhau}
                       onChange={(e) => setValues({ ...values, matKhau: e.target.value })}
