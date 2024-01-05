@@ -63,8 +63,8 @@ function Content() {
     <>
       <section className="product">
         <div className="container">
-          <div style={{ display: 'flex', paddingLeft: 17, paddingTop: 30 }}>
-            <h1 className="title">Sản Phẩm Mới Nhất</h1>
+          <div style={{ display: 'flex', paddingLeft: 17, paddingTop: 30 , }}>
+            <h1 style={{fontFamily:'initial',fontWeight:'bold',}}>SẢN PHẨM MỚI NHẤT</h1>
           </div>
           <div style={{ paddingLeft: 10, paddingRight: 10, color: 'red' }}>
             <hr></hr>
@@ -112,7 +112,7 @@ function Content() {
 
         <div className="container">
           <div style={{ display: 'flex', paddingLeft: 17, paddingTop: 30 }}>
-            <h1 className="title">Sản Phẩm Bán Chạy</h1>
+          <h1 style={{fontFamily:'initial',fontWeight:'bold',}}>SẢN PHẨM BÁN CHẠY</h1>
           </div>
           <div style={{ paddingLeft: 10, paddingRight: 10, color: 'red' }}>
             <hr></hr>

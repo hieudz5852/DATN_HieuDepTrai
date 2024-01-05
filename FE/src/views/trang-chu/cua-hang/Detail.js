@@ -245,11 +245,35 @@ function Detail(props) {
   }
 
   const handleAddToCartGH = () => {
-    if (!dataLogin) {
-      navigate('/login')
-      return
+    // if (!dataLogin) {
+    //   navigate('/login')
+    //   return
+    // }
+    // addSPToGH(dataLogin.id, valuesAddGH)
+    if (quantity > product.soLuong) {
+      toast.error('Đã vượt quá số lượng cho phép');
+      return;
     }
-    addSPToGH(dataLogin.id, valuesAddGH)
+    if (product.trangThai === 0) {
+      toast.error('Sản phẩm không còn kinh doanh !');
+      return;
+    }
+    if (product.sanPham.trangThai === 0) {
+      toast.error('Sản phẩm không còn kinh doanh !');
+      return;
+    }
+
+    if (product.soLuong === 0) {
+      toast.error('Sản phẩm đã hết hàng !');
+      return;
+    }
+    if (!dataLogin) {
+      localStorage.setItem('checkedLogin', true);
+      navigate('/login');
+      return;
+    }
+
+    addSPToGH(dataLogin.id, valuesAddGH);
   }
 
   return (

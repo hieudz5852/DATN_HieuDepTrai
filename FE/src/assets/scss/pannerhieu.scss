@@ -1,0 +1,22 @@
+.pannerHieu {
+    line-height: 30px;
+    animation: moveText 20s linear infinite; /* Tự động chạy vô hạn trong 5 giây */
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
+    color: #eaeff2;
+    font-size: 20px;
+    font-family: 'Arial', sans-serif; /* Chọn một font chữ khác nhau nếu cần */
+    font-weight: bold; /* Chọn độ đậm nhạt của chữ */
+    font-style: italic; /* Chọn kiểu chữ (nghiêng) */
+    background-color: black;
+}
+
+@keyframes moveText {
+    0% {
+        transform: translateX(100%); /* Di chuyển về bên phải 100% chiều rộng */
+    }
+    100% {
+        transform: translateX(-100%); /* Di chuyển về bên trái 100% chiều rộng */
+    }
+}
