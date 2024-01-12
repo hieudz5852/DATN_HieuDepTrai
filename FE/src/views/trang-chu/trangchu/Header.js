@@ -109,12 +109,12 @@ function Header() {
                 </a>
               </li>
               <li className="nav-item mx-3">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/#/gioi-thieu">
                   Về Chúng Tôi
                 </a>
               </li>
               <li className="nav-item mx-3">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/#/hotline">
                   Thông Tin Liên Hệ
                 </a>
               </li>

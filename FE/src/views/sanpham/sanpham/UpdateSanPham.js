@@ -304,7 +304,13 @@ function UpdateSanPham() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-
+    if (values.sanPham.ten === '' ) {
+      toast.error('Không được để trống tên!')
+      return
+    }if ( values.giaBan === '') {
+      toast.error('Không được để trống giá sản phẩm!')
+      return
+    }
     listMSKC.forEach((d) => {
       // Tạo một bản sao của `values` để cập nhật
       const updatedValues = { ...values }
@@ -437,11 +443,17 @@ function UpdateSanPham() {
                 Giá bán
               </label>
               <input
-                type="text"
+                type="number"
                 className="form-control"
                 placeholder="Nhập giá sản phẩm..."
                 value={values.giaBan}
-                onChange={(e) => setValues({ ...values, giaBan: e.target.value })}
+                onChange={(e) => {
+                  if (e.target.value >= 0) {
+                    setValues({ ...values, giaBan: e.target.value })
+                  } else {
+                    e.preventDefault()
+                  }
+                }}
               />
             </div>
 

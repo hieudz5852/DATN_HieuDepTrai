@@ -173,8 +173,25 @@ function AddSanPham() {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    if (!values.mauSac.id || !values.kichCo.id || !values.soLuong) {
+    if (!values.mauSac.id || !values.kichCo.id) {
       toast.error('Vui lòng điền đầy đủ thông tin')
+      return
+    }
+ 
+    if (values.sanPham.ten === '') {
+      toast.error('Vui lòng điền tên sản phẩm')
+      return
+    }if (values.giaBan === '') {
+      toast.error('Vui lòng điền giá sản phẩm')
+      return
+    } if (values.giaBan <= 1000) {
+      toast.error('Vui lòng điền giá sản phẩm > 1000')
+      return
+    }   if (values.soLuong === '') {
+      toast.error('Vui lòng điền số lựơng sản phẩm')
+      return
+    }  if (values.soLuong < 1) {
+      toast.error('Vui lòng điền số lựơng sản phẩm đúng')
       return
     }
     await postctsp(values)
@@ -269,11 +286,17 @@ function AddSanPham() {
                 Giá bán
               </label>
               <input
-                type="text"
+                type="number"
                 className="form-control"
                 placeholder="Nhập giá sản phẩm..."
                 value={values.giaBan}
-                onChange={(e) => setValues({ ...values, giaBan: e.target.value })}
+                onChange={(e) => {
+                  if (e.target.value >= 0) {
+                    setValues({ ...values, giaBan: e.target.value })
+                  } else {
+                    e.preventDefault()
+                  }
+                }}
               />
             </div>
 
@@ -504,11 +527,15 @@ function AddSanPham() {
                 className="form-control"
                 id="exampleFormControlInput1"
                 placeholder="Nhập số lượng"
+                value={values.soLuong}
                 onChange={(e) =>
-                  setValues({
-                    ...values,
-                    soLuong: e.target.value,
-                  })
+                  {
+                    if (e.target.value >= 1) {
+                      setValues({ ...values, soLuong: e.target.value })
+                    } else {
+                      e.preventDefault()
+                    }
+                  }
                 }
               />
             </div>
@@ -516,7 +543,7 @@ function AddSanPham() {
             <div className="col-12 d-flex justify-content-start">
               <div className="hidden-element">
                 <button onClick={handleSubmit} type="submit" className="btn btn-info">
-                Thêm sản phẩm <i className="fa-solid fa-square-plus"></i>
+                  Thêm sản phẩm <i className="fa-solid fa-square-plus"></i>
                 </button>
               </div>
             </div>

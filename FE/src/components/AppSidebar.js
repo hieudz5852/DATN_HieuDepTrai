@@ -19,7 +19,12 @@ const AppSidebar = () => {
   const dispatch = useDispatch()
   const unfoldable = useSelector((state) => state.sidebarUnfoldable)
   const sidebarShow = useSelector((state) => state.sidebarShow)
-
+  const headingStyle = {
+    fontFamily: "'Playfair Display', serif",
+    fontSize: 20,
+    color: 'aqua'
+    // Add other style properties as needed
+  };
   return (
     <CSidebar
       position="fixed"
@@ -30,8 +35,12 @@ const AppSidebar = () => {
       }}
     >
       <CSidebarBrand className="d-none d-md-flex" to="/">
-        <CIcon className="sidebar-brand-full" icon={logoNegative} height={35} />
-        <CIcon className="sidebar-brand-narrow" icon={sygnet} height={35} />
+        {/* <CIcon className="sidebar-brand-full" icon={logoNegative} height={35} />
+        <CIcon className="sidebar-brand-narrow" icon={sygnet} height={35} /> */}
+         <div>
+      <h2 style={headingStyle} height={35}>SHOP SHOES F5</h2>
+      {/* Add other JSX elements or components as needed */}
+    </div>
       </CSidebarBrand>
       <CSidebarNav>
         <SimpleBar>

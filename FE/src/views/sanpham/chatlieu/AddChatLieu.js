@@ -15,6 +15,10 @@ const AddChatLieu = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    if (values.ten === '') {
+      toast.error('Vui lòng nhập thuộc tính !')
+      return
+    }
     post(values)
   }
 
@@ -37,7 +41,9 @@ const AddChatLieu = () => {
             <div>
               <form className="row g-3" onSubmit={handleSubmit}>
                 <div className="col-md-6">
-                  <span className="form-label" style={{ fontWeight: 'bold' }}>Tên</span>
+                  <span className="form-label" style={{ fontWeight: 'bold' }}>
+                    Tên
+                  </span>
                   <input
                     type="text"
                     className="form-control"

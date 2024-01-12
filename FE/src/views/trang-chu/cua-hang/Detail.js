@@ -391,7 +391,7 @@ function Detail(props) {
                 >
                   Số lượng:{' '}
                 </p>
-                <div style={{ width: 128 }}>
+                <div style={{ width: 128, color: 'black' }}>
                   <InputSpinner
                     max={product.soLuong}
                     min={1}
@@ -451,7 +451,7 @@ function Detail(props) {
               </div>
 
               <div
-                style={{ paddingLeft: 28, maxHeight: 450, overflowY: 'scroll' }}
+                style={{ paddingLeft: 38, maxHeight: 450, overflowY: 'scroll' }}
                 className="col-4"
               >
                 {imageList.map((image, index) => (

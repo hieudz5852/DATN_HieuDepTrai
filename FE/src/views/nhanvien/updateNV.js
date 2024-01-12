@@ -31,6 +31,37 @@ const UpdateNV = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    const isGmailAddress = (email) => {
+      // Regex pattern for a Gmail address
+      const gmailRegex = /^[a-zA-Z0-9._%+-]+@(gmail\.com|email\.com|yahoo\.com|example\.com)$/;
+    
+      return gmailRegex.test(email);
+    };
+    const phoneRegex = /^0[0-9]{9}$/;
+
+    if (values.ten === ''  ) {
+      toast.error('Không được để trống tên!')
+      return
+    }if(values.email  === '' ){
+      toast.error('Không được để trống email!')
+      return
+    }if (!isGmailAddress(values.email)) {
+      toast.error('Email phải là địa chỉ hợp lệ!');
+      return;
+    }if(values.sdt  === '' ){
+      toast.error('Không được để trống SĐT!')
+      return
+    } if (!phoneRegex.test(values.sdt)) {
+      toast.error('SĐT phải đúng định dạng !')
+      return;
+    }if(values.diaChi  === '' ){
+      toast.error('Không được để trống địa chỉ!')
+      return
+    }
+    if(values.ngaySinh  === '' ){
+      toast.error('Không được để trống ngày sinh!')
+      return
+    }
     put(id, values)
   }
 

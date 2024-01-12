@@ -27,6 +27,10 @@ const AddMauSac = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    if (values.ma === '') {
+      toast.error('Vui lòng nhập thuộc tính !')
+      return
+    }
     post(values)
   }
 

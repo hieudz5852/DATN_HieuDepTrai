@@ -15,8 +15,11 @@ import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import { toast } from 'react-toastify'
 import { SignUp } from 'service/LoginService'
+import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
+  const navigate = useNavigate()
+
   const [state, setState] = React.useState({
     name: '',
     email: '',
@@ -84,6 +87,7 @@ const Register = () => {
       const res = await SignUp(userData)
       if (res) {
         toast.success('Đăng Ký Thành Công')
+        navigate('/login')
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {

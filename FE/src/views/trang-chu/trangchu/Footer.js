@@ -12,8 +12,8 @@ function Footer() {
               <div className="single-cta">
                 <i className="fas fa-map-marker-alt"></i>
                 <div className="cta-text">
-                  <h4>Find us</h4>
-                  <span>1010 Avenue, sw 54321, chandigarh</span>
+                  <h4>Địa Chỉ</h4>
+                  <span>Ngách 86/2 Phú Mỹ, Biên Giang, Hà Đông, Hà Nội.</span>
                 </div>
               </div>
             </div>
@@ -21,8 +21,8 @@ function Footer() {
               <div className="single-cta">
                 <i className="fas fa-phone"></i>
                 <div className="cta-text">
-                  <h4>Call us</h4>
-                  <span>9876543210 0</span>
+                  <h4>HotLine</h4>
+                  <span>0395852610</span>
                 </div>
               </div>
             </div>
@@ -30,8 +30,8 @@ function Footer() {
               <div className="single-cta">
                 <i className="far fa-envelope-open"></i>
                 <div className="cta-text">
-                  <h4>Mail us</h4>
-                  <span>mail@info.com</span>
+                  <h4>Email</h4>
+                  <span>hieuvuive13579@gmail.com</span>
                 </div>
               </div>
             </div>

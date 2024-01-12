@@ -37,6 +37,10 @@ const UpdateChatLieu = () => {
   
     const handleSubmit = (event) => {
       event.preventDefault();
+      if (values.ten === '') {
+        toast.error('Vui lòng nhập thuộc tính !')
+        return
+      }
       put(id, values);
     };
   

@@ -25,7 +25,7 @@ public class SanPham {
     private String ma;
 
     @Column(name = "ten")
-    @NotBlank(message = "Không được để trống Tên")
+//    @NotBlank(message = "Không được để trống Tên")
     private String ten;
 
     @Column(name = "trang_thai")

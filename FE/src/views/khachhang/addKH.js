@@ -104,12 +104,46 @@ const AddKH = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+    const isGmailAddress = (email) => {
+      // Regex pattern for a Gmail address
+      const gmailRegex = /^[a-zA-Z0-9._%+-]+@(gmail\.com|email\.com|yahoo\.com|example\.com)$/;
+    
+      return gmailRegex.test(email);
+    };
+    
+    if (values.tenKhachHang === ''  ) {
+      toast.error('Không được để trống tên!')
+      return
+    }if(values.sdt  === '' ){
+      toast.error('Không được để trống SĐT!')
+      return
+    }
+    const phoneRegex = /^0[0-9]{9}$/;
+    if (!phoneRegex.test(values.sdt)) {
+      toast.error('SĐT phải đúng định dạng !')
+      return;
+    }if(values.email  === '' ){
+      toast.error('Không được để trống email!')
+      return
+    }if (!isGmailAddress(values.email)) {
+      toast.error('Email phải là địa chỉ hợp lệ!');
+      return;
+    }if(values.diaChi  === '' ){
+      toast.error('Không được để trống địa chỉ!')
+      return
+    }
+    if(values.ngaySinh  === '' ){
+      toast.error('Không được để trống ngày sinh!')
+      return
+    }
+    
     setValues((prevValues) => ({
       ...prevValues,
       tinhThanh: selectedProvinceName,
       quanHuyen: selectedDistrictName,
       phuongXa: selectedWardName,
     }))
+
     const formData = new FormData()
     formData.append('tenKhachHang', values.tenKhachHang)
     formData.append('sdt', values.sdt)
@@ -122,7 +156,18 @@ const AddKH = () => {
     formData.append('quanHuyen', selectedDistrictName)
     formData.append('phuongXa', selectedWardName)
     formData.append('matKhau', values.matKhau)
-
+    if(selectedProvinceName  === '' ){
+      toast.error('Không được để trống tỉnh!')
+      return
+    }
+    if(selectedDistrictName  === '' ){
+      toast.error('Không được để trống quận!')
+      return
+    }
+    if(selectedWardName  === '' ){
+      toast.error('Không được để trống xã!')
+      return
+    }
     try {
       const res = await addKH(formData)
       if (res) {
@@ -192,19 +237,6 @@ const AddKH = () => {
                       className="form-control"
                       value={values.diaChi}
                       onChange={(e) => setValues({ ...values, diaChi: e.target.value })}
-                    />
-                  </div>
-                  <div className="col-4">
-                    <label htmlFor="diaChi" className="form-label">
-                      Mật khẩu
-                    </label>
-                    <input
-                    disabled={true}
-                      id="diaChi"
-                      type="password"
-                      className="form-control"
-                      value={values.matKhau}
-                      onChange={(e) => setValues({ ...values, matKhau: e.target.value })}
                     />
                   </div>
                   <div className="col-4">

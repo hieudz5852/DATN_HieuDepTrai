@@ -177,6 +177,51 @@ const UpdateKH = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    const isGmailAddress = (email) => {
+      // Regex pattern for a Gmail address
+      const gmailRegex = /^[a-zA-Z0-9._%+-]+@(gmail\.com|email\.com|yahoo\.com|example\.com)$/;
+    
+      return gmailRegex.test(email);
+    };
+    
+    if (values.tenKhachHang === ''  ) {
+      toast.error('Không được để trống tên!')
+      return
+    }if(values.sdt  === '' ){
+      toast.error('Không được để trống SĐT!')
+      return
+    }
+    const phoneRegex = /^0[0-9]{9}$/;
+    if (!phoneRegex.test(values.sdt)) {
+      toast.error('SĐT phải đúng định dạng !')
+      return;
+    }if(values.email  === '' ){
+      toast.error('Không được để trống email!')
+      return
+    }if (!isGmailAddress(values.email)) {
+      toast.error('Email phải là địa chỉ hợp lệ!');
+      return;
+    }if(values.diaChi  === '' ){
+      toast.error('Không được để trống địa chỉ!')
+      return
+    }
+    if(values.ngaySinh  === '' ){
+      toast.error('Không được để trống ngày sinh!')
+      return
+    }
+    // if(selectedProvinceName  === '' ){
+    //   toast.error('Không được để trống tỉnh!')
+    //   return
+    // }
+    // if(selectedDistrictName  === '' ){
+    //   toast.error('Không được để trống quận!')
+    //   return
+    // }
+    // if(selectedWardName  === '' ){
+    //   toast.error('Không được để trống xã!')
+    //   return
+    // }
+
     put(id, values)
   }
 

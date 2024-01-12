@@ -12,7 +12,7 @@ function Banner() {
     <div>
       <div  style={{ height: 30 ,backgroundColor:'black',marginBottom:1}}>
         <p className="pannerHieu">
-          CHÀO MỪNG BẠN ĐẾN VỚI SHOP BÁN GIẦY F5, NẾU CÓ THĂC MẮC CẦN GIẢI ĐÁP VUI LÒNG LIÊN HỆ ADMIN NGUYỄN VŨ MINH HIẾU VỚI SỐ 0395852610 ĐỂ ĐƯỢC HỖ TRỢ
+          CHÀO MỪNG BẠN ĐẾN VỚI SHOP BÁN GIẦY F5, NẾU CÓ THĂC MẮC CẦN GIẢI ĐÁP VUI LÒNG LIÊN HỆ ADMIN NGUYỄN VŨ MINH HIẾU VỚI SỐ 0395852610.
         </p>
       </div>
 
