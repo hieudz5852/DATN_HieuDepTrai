@@ -22,6 +22,7 @@ public interface HoaDonRespository extends JpaRepository<HoaDon, UUID> {
             "SUM(HDCT.so_luong * HDCT.don_gia) as tong_tien, HD.trang_thai, HD.loai_don\n" +
             "FROM HoaDon HD\n" +
             "JOIN HoaDonChiTiet HDCT ON HD.id = HDCT.id_hd\n" +
+            "WHERE HD.ten_nguoi_nhan is not null\n" +
             "GROUP BY HD.id, HD.ma, HD.ten_nguoi_nhan, HD.ngay_tao, HD.tong_tien, HD.trang_thai, HD.loai_don\n" +
             "ORDER BY HD.ngay_tao DESC",
             nativeQuery = true)
@@ -33,6 +34,7 @@ public interface HoaDonRespository extends JpaRepository<HoaDon, UUID> {
             "WHERE HD.trang_thai in :trangThai \n" +
             "and hd.id_kh = :idKH \n" +
             "and loai_don = 1\n" +
+            "and HD.ten_nguoi_nhan is not null\n" +
             "ORDER BY HD.ngay_sua DESC",
             nativeQuery = true)
     List<HoaDon> searchByTrangThai(@Param("trangThai") Integer[] trangThai, @Param("idKH") UUID idKH);
@@ -49,6 +51,7 @@ public interface HoaDonRespository extends JpaRepository<HoaDon, UUID> {
             "       AND (:denNgay IS NULL OR HD.ngay_tao <= :denNgay) \n" +
             "       AND (:trangThai IS NULL OR HD.trang_thai = :trangThai) \n" +
             "       AND (:loaiDon IS NULL OR HD.loai_don = :loaiDon)\n" +
+            "       AND HD.ten_nguoi_nhan is not null \n" +
             "GROUP BY HD.id, HD.ma, HD.ten_nguoi_nhan, HD.ngay_tao, HD.trang_thai, HD.loai_don\n" +
             "HAVING ((:minSL IS NULL OR SUM(HDCT.so_luong) >= :minSL) \n" +
             "       AND (:maxSL IS NULL OR SUM(HDCT.so_luong) <= :maxSL)) \n" +

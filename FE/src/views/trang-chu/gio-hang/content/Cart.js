@@ -74,7 +74,11 @@ function Cart(props) {
 
   const handleTaoHoaDon = () => {
     if (selectedProducts.length === 0) {
-      toast.error('Vui lòng chọn sản phẩm trước khi thanh toán')
+      toast.error('Vui lòng chọn sản phẩm trước khi thanh toán !')
+      return
+    }
+    if (totalAmount > 50000000) {
+      toast.error('Chỉ hỡ trợ mua online đơn dưới 50 triệu !')
       return
     }
     // eslint-disable-next-line react/prop-types

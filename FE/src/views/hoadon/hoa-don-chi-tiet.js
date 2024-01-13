@@ -540,6 +540,10 @@ function HDCT() {
       toast.error('Vui lòng điền phí vận chuyển !')
       return;
     }
+    if (totalAmount === 0) {
+      toast.error('Vui lòng thêm sản phẩm vào giỏ hàng !')
+      return;
+    }
     await giaoHang(id, lshd2)
   }
 
