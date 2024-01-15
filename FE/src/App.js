@@ -26,6 +26,7 @@ const History = React.lazy(() => import('views/trang-chu/history/History'))
 const About = React.lazy(() => import('views/trang-chu/about/about'))
 const HotLine = React.lazy(() => import('views/trang-chu/hotline/hotline'))
 const ThankYou = React.lazy(() => import('views/trang-chu/thankyou/thankyou'))
+const ChinhSach = React.lazy(() => import('views/trang-chu/chinh-sach/chinhsach'))
 
 const ThongTinKhachHang = React.lazy(() =>
   import('views/trang-chu/thong-tin-khach-hang/ThongTinKhachHang'),
@@ -57,6 +58,8 @@ class App extends Component {
             <Route path="/history" name="Lịch sử mua hàng" element={<History />} />
             <Route path="/gioi-thieu" name="Ve chung toi" element={<About />} />
             <Route path="/hotline" name="Ve chung toi" element={<HotLine />} />
+            <Route path="/chinh-sach" name="Ve chung toi" element={<ChinhSach />} />
+
             <Route path="/thankyou" name="Ve chung toi" element={<ThankYou />} />
 
           </Routes>

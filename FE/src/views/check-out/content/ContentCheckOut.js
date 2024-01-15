@@ -9,6 +9,8 @@ import { addKhuyenMai, clearGH, thanhToan } from 'service/GioHangService'
 import { detailKH } from 'service/KhachHangService'
 import { payOnline } from 'service/PayService'
 import { getById, getKmById } from 'service/ServiceDonHang'
+import ModalChinhSach from './ModalCS'
+import { Checkbox, FormControlLabel } from '@mui/material';
 const dataLoginKH = JSON.parse(localStorage.getItem('dataLogin'))
 function ContentCheckOut({ dataLogin, idGH }) {
   const { id } = useParams()
@@ -21,6 +23,8 @@ function ContentCheckOut({ dataLogin, idGH }) {
   const [urlPay, setUrlPay] = useState('')
   // const [isThanhToan, setIsThanhToan] = useState(false)
   const [dataHDCT, setDataHDCT] = useState([])
+  const [checked, setChecked] = useState(false);
+  const [isShowDK, setIsShowDK] = useState(false);
   const [totalAmount, setTotalAmount] = useState(0)
   const [tongTienSauKhiGiam, setTongTienSauKhiGiam] = useState(0)
   const [dataHDKM, setDataHDKM] = useState([])
@@ -311,7 +315,6 @@ function ContentCheckOut({ dataLogin, idGH }) {
     try {
       const res = await thanhToan(id, value, nguoiTao)
       if (res) {
-        toast.success('Thanh toán thành công')
         localStorage.setItem('res', JSON.stringify(res.data.hinhThucThanhToan.id))
         clear(idGH, id)
       }
@@ -321,10 +324,18 @@ function ContentCheckOut({ dataLogin, idGH }) {
   }
 
   const handleThanhToan = () => {
+
+    if (active === null || active === '') {
+      toast.warning('Vui lòng chọn phương thức thanh toán !')
+      return
+    }
+
     if (active) {
       thanhToanHD(id, valuesUpdateHD, dataLoginKH && dataLoginKH.tenKhachHang)
       navigate('/trang-chu')
+      toast.success('Thanh toán thành công')
     }
+
     if (active === false) {
       window.location.href = urlPay 
       thanhToanHD(id, valuesUpdateHD, dataLoginKH && dataLoginKH.tenKhachHang)
@@ -454,11 +465,26 @@ function ContentCheckOut({ dataLogin, idGH }) {
               </select>
             </div>
             <div className="col-12 mt-3 ms-2 me-2 d-flex justify-content-between align-items-center">
-              <p style={{ cursor: 'pointer' }}>Giỏ hàng</p>
-              <button type="button" className="btn btn-success" onClick={handleThanhToan}>
+{checked === true &&(
+  <button type="button" className="btn btn-success" onClick={handleThanhToan}>
                 Thanh toán
               </button>
+)}
+              
+
             </div>
+<br></br>
+            <FormControlLabel
+                    // required
+                    control={<Checkbox />}
+                    onChange={() => setChecked(!checked)}
+                    label={
+                      <p style={{ marginBottom: 0, marginTop: 14 }}>
+                        Bạn phải chấp nhận <button style={{border: "none", color: "blue", backgroundColor: 'white'}} onClick={() => setIsShowDK(true)}>điều khoản & chính sách</button> của chúng tôi để được đặt hàng !
+                      </p>
+                    }
+                  />
+
             <div
               className="col-12 mt-5 ms-3 d-flex align-items-center"
               style={{
@@ -565,7 +591,7 @@ function ContentCheckOut({ dataLogin, idGH }) {
                 />
               </div>
               <div className="col-3 mb-4">
-                <button type="button" className="btn btn-success mt-3" onClick={handleAddVoucher}>
+                <button style={{width: 110}} type="button" className="btn btn-success mt-3" onClick={handleAddVoucher}>
                   Áp dụng
                 </button>
               </div>
@@ -593,9 +619,17 @@ function ContentCheckOut({ dataLogin, idGH }) {
                 <p>{convertToCurrency(tongTienSauKhiGiam)}</p>
               </div>
             </div>
+
+<br></br><br></br>
+
+            <p style={{ color: 'red', fontSize: 16, fontWeight: 'bold', paddingTop: 50 }}>
+                    *Lưu ý: Tổng tiền ở bên trên chưa tính tiền ship, khách hàng sẽ phải tự trả tiền ship cho shipper khi đã nhận được hàng.
+                  </p>
+
           </div>
         </div>
       </div>
+      <ModalChinhSach show={isShowDK} handleClose={() => setIsShowDK(false)} />
     </div>
   )
 }

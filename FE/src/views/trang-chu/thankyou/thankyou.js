@@ -24,7 +24,6 @@ function ThankYou() {
       <br></br>
       <br></br>
       <br></br>
-
       <p></p>
       <Footer />
     </div>
