@@ -10,7 +10,9 @@ import { detailKH } from 'service/KhachHangService'
 import { payOnline } from 'service/PayService'
 import { getById, getKmById } from 'service/ServiceDonHang'
 import ModalChinhSach from './ModalCS'
-import { Checkbox, FormControlLabel } from '@mui/material';
+import { Checkbox, FormControlLabel } from '@mui/material'
+import { getAllKM } from 'service/ServiceKhuyenMai'
+import '../../../scss/Card.scss'
 const dataLoginKH = JSON.parse(localStorage.getItem('dataLogin'))
 function ContentCheckOut({ dataLogin, idGH }) {
   const { id } = useParams()
@@ -23,8 +25,8 @@ function ContentCheckOut({ dataLogin, idGH }) {
   const [urlPay, setUrlPay] = useState('')
   // const [isThanhToan, setIsThanhToan] = useState(false)
   const [dataHDCT, setDataHDCT] = useState([])
-  const [checked, setChecked] = useState(false);
-  const [isShowDK, setIsShowDK] = useState(false);
+  const [checked, setChecked] = useState(false)
+  const [isShowDK, setIsShowDK] = useState(false)
   const [totalAmount, setTotalAmount] = useState(0)
   const [tongTienSauKhiGiam, setTongTienSauKhiGiam] = useState(0)
   const [dataHDKM, setDataHDKM] = useState([])
@@ -64,6 +66,18 @@ function ContentCheckOut({ dataLogin, idGH }) {
     },
     tienGiam: 0,
   })
+  const [km, setKM] = useState([])
+
+  useEffect(() => {
+    getKM(totalAmount)
+  }, [totalAmount])
+
+  const getKM = async (tien) => {
+    const res = await getAllKM(tien)
+    if (res && res.data) {
+      setKM(res.data)
+    }
+  }
 
   useEffect(() => {
     getThanhPho()
@@ -90,7 +104,7 @@ function ContentCheckOut({ dataLogin, idGH }) {
     }
   }, [dataLogin])
 
-  console.log(active);
+  console.log(active)
 
   useEffect(() => {
     if (dataLogin && dataLogin.role === 'KH') {
@@ -98,7 +112,7 @@ function ContentCheckOut({ dataLogin, idGH }) {
         ...valuesUpdateHD,
         trangThai: active === true ? 0 : 1,
         khachHang: {
-          id: dataLogin.id
+          id: dataLogin.id,
         },
         tenNguoiNhan: dataKH.tenKhachHang,
         nguoiTao: dataKH.tenKhachHang,
@@ -324,7 +338,6 @@ function ContentCheckOut({ dataLogin, idGH }) {
   }
 
   const handleThanhToan = () => {
-
     if (active === null || active === '') {
       toast.warning('Vui lòng chọn phương thức thanh toán !')
       return
@@ -337,9 +350,25 @@ function ContentCheckOut({ dataLogin, idGH }) {
     }
 
     if (active === false) {
-      window.location.href = urlPay 
+      window.location.href = urlPay
       thanhToanHD(id, valuesUpdateHD, dataLoginKH && dataLoginKH.tenKhachHang)
     }
+  }
+
+  function formatDate(dateString) {
+    if (dateString === null) {
+      return '' // Trả về chuỗi rỗng nếu giá trị là null
+    }
+
+    const dateObject = new Date(dateString)
+
+    const day = dateObject.getDate()
+    const month = dateObject.getMonth() + 1
+    const year = dateObject.getFullYear()
+
+    const formattedDate = `${day}/${month}/${year}`
+
+    return formattedDate
   }
 
   const clear = async (id, idHD) => {
@@ -465,25 +494,30 @@ function ContentCheckOut({ dataLogin, idGH }) {
               </select>
             </div>
             <div className="col-12 mt-3 ms-2 me-2 d-flex justify-content-between align-items-center">
-{checked === true &&(
-  <button type="button" className="btn btn-success" onClick={handleThanhToan}>
-                Thanh toán
-              </button>
-)}
-              
-
+              {checked === true && (
+                <button type="button" className="btn btn-success" onClick={handleThanhToan}>
+                  Thanh toán
+                </button>
+              )}
             </div>
-<br></br>
+            <br></br>
             <FormControlLabel
-                    // required
-                    control={<Checkbox />}
-                    onChange={() => setChecked(!checked)}
-                    label={
-                      <p style={{ marginBottom: 0, marginTop: 14 }}>
-                        Bạn phải chấp nhận <button style={{border: "none", color: "blue", backgroundColor: 'white'}} onClick={() => setIsShowDK(true)}>điều khoản & chính sách</button> của chúng tôi để được đặt hàng !
-                      </p>
-                    }
-                  />
+              // required
+              control={<Checkbox />}
+              onChange={() => setChecked(!checked)}
+              label={
+                <p style={{ marginBottom: 0, marginTop: 14 }}>
+                  Bạn phải chấp nhận{' '}
+                  <button
+                    style={{ border: 'none', color: 'blue', backgroundColor: 'white' }}
+                    onClick={() => setIsShowDK(true)}
+                  >
+                    điều khoản & chính sách
+                  </button>{' '}
+                  của chúng tôi để được đặt hàng !
+                </p>
+              }
+            />
 
             <div
               className="col-12 mt-5 ms-3 d-flex align-items-center"
@@ -591,10 +625,44 @@ function ContentCheckOut({ dataLogin, idGH }) {
                 />
               </div>
               <div className="col-3 mb-4">
-                <button style={{width: 110}} type="button" className="btn btn-success mt-3" onClick={handleAddVoucher}>
+                <button
+                  style={{ width: 110 }}
+                  type="button"
+                  className="btn btn-success mt-3"
+                  onClick={handleAddVoucher}
+                >
                   Áp dụng
                 </button>
               </div>
+
+              <div
+                className="container"
+                style={{ maxWidth: 500, maxHeight: 130, overflow: 'auto' }}
+              >
+                {km.map((d, i) => (
+                  <div key={i} className={`row div-container mb-2`}>
+                    <div
+                      className={`col-12 card-voucher`}
+                      // onClick={() => handleDivClick(i)}
+                      style={{ cursor: 'copy' }}
+                    >
+                      <h6 style={{ color: 'green' }}>
+                        Giảm {d.loaiGiam ? convertToCurrency(d.mucGiam) : d.mucGiam + '%'} cho đơn
+                        tối thiểu {convertToCurrency(d.tien)}
+                      </h6>
+                      <p style={{ color: 'red' }}>Mã Giảm Giá: {d.ma}</p>
+                      <p style={{ fontSize: '13px', color: 'gray' }}>
+                        HSD: {formatDate(d.thoiGianKetThuc)}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <hr />
+
+              <br></br>
+              <br></br>
               <hr />
             </div>
             <div className="col-12 ms-1">
@@ -620,12 +688,12 @@ function ContentCheckOut({ dataLogin, idGH }) {
               </div>
             </div>
 
-<br></br><br></br>
-
+            <br></br>
             <p style={{ color: 'red', fontSize: 16, fontWeight: 'bold', paddingTop: 50 }}>
-                    *Lưu ý: Tổng tiền ở bên trên chưa tính tiền ship, khách hàng sẽ phải tự trả tiền ship cho shipper khi đã nhận được hàng.
-                  </p>
-
+              *Lưu ý: Tổng tiền ở bên trên chưa tính tiền ship, khách hàng sẽ phải tự trả tiền ship
+              cho shipper khi đã nhận được hàng.
+            </p>
+            <br></br>
           </div>
         </div>
       </div>

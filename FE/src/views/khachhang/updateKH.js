@@ -183,7 +183,8 @@ const UpdateKH = () => {
     
       return gmailRegex.test(email);
     };
-    
+    const phoneRegex = /^0[0-9]{9}$/;
+
     if (values.tenKhachHang === ''  ) {
       toast.error('Không được để trống tên!')
       return
@@ -191,7 +192,6 @@ const UpdateKH = () => {
       toast.error('Không được để trống SĐT!')
       return
     }
-    const phoneRegex = /^0[0-9]{9}$/;
     if (!phoneRegex.test(values.sdt)) {
       toast.error('SĐT phải đúng định dạng !')
       return;

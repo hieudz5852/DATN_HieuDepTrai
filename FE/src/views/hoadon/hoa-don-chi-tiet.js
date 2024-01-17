@@ -536,10 +536,10 @@ function HDCT() {
 
   const handleXacNhanGiaoHang = async (event) => {
     event.preventDefault()
-    if (hoaDon.tienShip === 0 || hoaDon.tienShip === '' || hoaDon.tienShip === null) {
-      toast.error('Vui lòng điền phí vận chuyển !')
-      return;
-    }
+    // if (hoaDon.tienShip === 0 || hoaDon.tienShip === '' || hoaDon.tienShip === null) {
+    //   toast.error('Vui lòng điền phí vận chuyển !')
+    //   return;
+    // }
     if (totalAmount === 0) {
       toast.error('Vui lòng thêm sản phẩm vào giỏ hàng !')
       return;
@@ -910,12 +910,12 @@ function HDCT() {
               <Text style={styles.textLeft}>Tổng tiền</Text>
               <Text style={styles.textRight}>{convertToCurrency(totalAmount)}</Text>
             </View>
-            {hoaDon.tienShip !== 0 && (
+            {/* {hoaDon.tienShip !== 0 && (
               <View style={styles.flexContainer}>
                 <Text style={styles.textLeft}>Tiền ship</Text>
                 <Text style={styles.textRight}>{convertToCurrency(hoaDon.tienShip)}</Text>
               </View>
-            )}
+            )} */}
 
             <Text style={styles.textLeft}></Text>
             {dataHDKM.map((d) => (
@@ -1867,7 +1867,7 @@ function HDCT() {
 
               <br></br>
 
-              {hoaDon && hoaDon.loaiDon === 1 && (
+              {/* {hoaDon && hoaDon.loaiDon === 1 && (
                 <Container style={{ display: 'flex', justifyContent: 'end' }}>
                   <Row style={{ marginBottom: 10 }}>
                     <Col sm={12} className="row">
@@ -1915,7 +1915,7 @@ function HDCT() {
                   </Row>
                 </Container>
               )}
-              <br></br>
+              <br></br> */}
 
               {dataHDKM && dataHDKM.length > 0 && (
                 <Container style={{ display: 'flex', justifyContent: 'end' }}>

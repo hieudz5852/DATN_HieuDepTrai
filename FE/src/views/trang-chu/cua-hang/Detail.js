@@ -270,6 +270,7 @@ function Detail(props) {
     if (!dataLogin) {
       localStorage.setItem('checkedLogin', true);
       navigate('/login');
+      toast.error('Phải đăng nhập trước khi đặt hàng !');
       return;
     }
 
