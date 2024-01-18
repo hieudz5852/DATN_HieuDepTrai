@@ -67,6 +67,8 @@ function ContentCheckOut({ dataLogin, idGH }) {
     tienGiam: 0,
   })
   const [km, setKM] = useState([])
+  const [km1, setKM1] = useState('')
+
 
   useEffect(() => {
     getKM(totalAmount)
@@ -355,6 +357,33 @@ function ContentCheckOut({ dataLogin, idGH }) {
     }
   }
 
+  useEffect(() => {
+    if (km1) {
+      setValuesKhuyenMai({
+        ...valuesKhuyenMai,
+        khuyenMai: {
+          ma: km1,
+          tien: totalAmount,
+        },
+      })
+    }
+    // setSelectedDistrict(valuesId)
+  }, [km1])
+
+
+  const handleDivClick = (ma) =>{
+  setKM1(ma)
+  // handleAddVoucher(ma)
+
+  setValuesKhuyenMai({
+    ...valuesKhuyenMai,
+    khuyenMai: {
+      ma: ma,
+      tien: totalAmount,
+    },
+  })
+  }
+
   function formatDate(dateString) {
     if (dateString === null) {
       return '' // Trả về chuỗi rỗng nếu giá trị là null
@@ -621,6 +650,7 @@ function ContentCheckOut({ dataLogin, idGH }) {
                   className="form-control mt-3"
                   placeholder="Nhập mã giảm giá"
                   aria-label="First name"
+                  value={km1}
                   onChange={(e) => handleChangeKM(e.target.value)}
                 />
               </div>
@@ -643,8 +673,8 @@ function ContentCheckOut({ dataLogin, idGH }) {
                   <div key={i} className={`row div-container mb-2`}>
                     <div
                       className={`col-12 card-voucher`}
-                      // onClick={() => handleDivClick(i)}
-                      style={{ cursor: 'copy' }}
+                      onClick={() => handleDivClick(d.ma)}
+                      style={{ cursor: 'pointer' }}
                     >
                       <h6 style={{ color: 'green' }}>
                         Giảm {d.loaiGiam ? convertToCurrency(d.mucGiam) : d.mucGiam + '%'} cho đơn

@@ -120,7 +120,7 @@ function Header() {
               </li>
               <li className="nav-item mx-3">
                 <a className="nav-link" href="/#/hotline">
-                  Thông Tin Liên Hệ
+                  Liên Hệ
                 </a>
               </li>
             </ul>

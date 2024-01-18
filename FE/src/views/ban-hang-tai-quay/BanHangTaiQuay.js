@@ -342,7 +342,6 @@ export default function BanHangTaiQuay() {
       console.log(error)
     }
   }
-
   const updateTTHD = async (idHD, value) => {
     try {
       const res = await updateHD(idHD, value)
@@ -352,8 +351,7 @@ export default function BanHangTaiQuay() {
     } catch (error) {
       console.log(error)
     }
-  }
-
+  } 
   return (
     <CRow>
       <CCol xs={12}>
@@ -399,7 +397,7 @@ export default function BanHangTaiQuay() {
                 </p>
               </div>
             </div>
-            <div className="ma-giam-gia">
+            {/* <div className="ma-giam-gia">
               <div>
                 <h6>Mã giảm giá</h6>
               </div>
@@ -414,7 +412,7 @@ export default function BanHangTaiQuay() {
                   />{' '}
                 </p>
               </div>
-            </div>{' '}
+            </div>{' '} */}
             <div className="ma-giam-gia">
               <div>
                 <h6>Số lượng sản phẩm</h6>
@@ -447,7 +445,8 @@ export default function BanHangTaiQuay() {
               </div>
               <div>
                 <p style={{ fontSize: 'large', fontWeight: 'bold' }}>
-                  {convertToCurrency(dataDetailHD.tongTienKhiGiam)}
+                 
+                  {dataDetailHD.tongTienKhiGiam===undefined ? (convertToCurrency(0)) : (convertToCurrency(dataDetailHD.tongTienKhiGiam))}
                 </p>
               </div>
             </div>
@@ -547,7 +546,7 @@ export default function BanHangTaiQuay() {
                         tienThua={tienThua}
                       />
                     }
-                    fileName="hoa_don.pdf"
+                    fileName={dataDetailHD.ma}
                   >
                     <Text style={styles.button}>
                       <i className="fa-solid fa-cart-shopping"></i> Thanh toán
